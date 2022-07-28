@@ -1,0 +1,3 @@
+[console_scripts]
+create-license = create_license:_main
+
