@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tradebinbot"
+version = "0.0.1"
+authors = [
+  { name="Cleber Couto Filho", email="clebercoutof@gmail.com" },
+]
+description = "Pacote para trade automatizado"
+readme = "README.md"
+license = { file="LICENSE" }
+requires-python = ">=3.6.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/clebercoutof/pybin_tests"
+"Bug Tracker" = "https://github.com/clebercoutof/pybin_tests/issues"
