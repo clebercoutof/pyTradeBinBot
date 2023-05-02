@@ -1,13 +1,13 @@
 # TradeBinBot - A simple Python live trading robot
 
-  Essa aplicação foi desenvolvida como um protótipo de um robô para realizar operações de trading utilizando a API da binance e a análise tecnica do mercado.
+  Essa aplicação foi desenvolvida como um protótipo de um robô para realizar operações de trading utilizando a API da binance e a fundamentos de análise técnica do mercado.
 
   ![alt text](images/RUNNING-BOT.png)
 
-  O protótipo foi desenvolvido considerando uma futuram integração com o framework Django, possibilitando a interação com o usuário por meio de um front-end
+  O protótipo foi desenvolvido numa estrutura para possibilitar uma futura integração com frameworks de back-end.
 
 ## Instalação Manual
- > Caso o usuário opte por não utilizar a imagem da docker, pode instalar o programa manualmente utilizando os seguintes passos.
+ > Caso o usuário opte por não utilizar a imagem  docker, pode instalar o programa manualmente utilizando os seguintes passos.
  > É recomendado que a instalação seja feita em um ambiente isolado, recomendamos o `python venv`, você pode encontrar informações nesse  [link](https://docs.python.org/3/library/venv.html).
 
 A instalação manual consiste em alguns passos:
@@ -19,29 +19,36 @@ A instalação manual consiste em alguns passos:
 3. Instalação da biblioteca C da TA-Lib;
 
 4. Instalação das dependências em python;
+
 ### 1. Instalação Python
-Atualize a lsita de pacotes e instale os pré requisitos
+1.1 Atualize a lsita de pacotes e instale os pré requisitos
 ```
 $ sudo apt update
 $ sudo apt install software-properties-common
 ```
 
-Adicione o PPA da deadsnakes a lista de sources do sistema:
+1.2 Adicione o PPA da deadsnakes a lista de sources do sistema:
 ```
 $ sudo add-apt-repository ppa:deadsnakes/ppa
 ```
+1.3 Atualize novamente as fontes de seus pacotes e atualize o python
+```
+$ sudo apt update 
+$ sudo apt install python3.9 
+```
 ### 2. Ambiente Virtual
-> O programa conta com um script para criação do ambiente virtual em python e a adição no comando dentro do arquivo `/home/usr/.bashrc` do usuário. Para efeitos de exemplo, iremos utilizar o nome do ambiente como `tradebin_env`
+> O programa conta com um script para criação do ambiente virtual em python e a adição no comando dentro do arquivo `/home/usr/.bashrc` do usuário. Para efeitos de exemplo, iremos utilizar o nome do ambiente como `tradebin_env`.
 
-Clone o repositório no seu computador
- ```
-  $ git clone git@github.com:clebercoutof/pyTradeBinBot.git
- ```
-Torne o script executável
+2.1 Clone o repositório no seu computador
+```
+$ git clone git@github.com:clebercoutof/pyTradeBinBot.git
+```
+
+2.2 Torne o script executável
  ```
   $ chmod +x create_env_3.9.sh 
  ```
-Execute o script e escolha o nome desejado para o ambiente virtual
+2.3 Execute o script e escolha o nome desejado para o ambiente virtual:
 ```
   user@pc:~/path/to/pyTradeBinBot$ ./create_env_3.9.sh 
   Enter Your VIRTUAL ENV name: tradebin_env
@@ -50,6 +57,7 @@ Execute o script e escolha o nome desejado para o ambiente virtual
 
 ### 3. Instalação da biblioteca C da TA-Lib;
 > O usuário pode encontrar a biblioteca original dentro da pasta `/external/`, realizando a instalação como um pacote C comum.
+
   ```
 $ tar -xzf ta-lib-0.4.0-src.tar.gz
 $ cd ta-lib/
@@ -60,12 +68,12 @@ $ sudo make install
 ### 4. Instalação das dependências em python;
  > As depêndencias em python podem ser instaladas por meio do comando `pip install`.
 
-Para ativar o ambiente virtual, utilize o comando `activate_nomedoenv`, no caso do tutorial utilizamos o nome `tradebin_env`:
+3.1 Para ativar o ambiente virtual, utilize o comando `activate_nomedoenv`, para efeitos de exemplo, utilizaremos `tradebin_env`:
 
  ```
  user@pc:~/path/to/pyTradeBinBot$ activate_tradebin_env
  ```
-Dentro do environment, o usuário pode instalar o utilizando a função `pip install` normalmente.
+3.2 Dentro do environment, o usuário pode instalar as dependências python normalmente utilizando a função `pip install`.
 
 ```
   (tradebin_env) user@pc:~/root/path/to/pyTradeBinBot $ pip install -r requirements.txt .
@@ -85,7 +93,6 @@ Esses são os principais pacotes utilizados
  - Python v3.9
  - GCC v7.5.0
  - Ubuntu v18.04 
- - Docker
 
 ### Módulos Internos
 
@@ -99,7 +106,7 @@ Esses são os principais pacotes utilizados
 
 `orderManager` - Módulo que utiliza a API da binance para realizar as ordens de compra e venda diretamente na corretora.
 
-### Resultados
+## Resultados
 
   >Balanço final positivo em operação de demonstração com baixos valores para RSI e contratos
 
@@ -110,7 +117,7 @@ Esses são os principais pacotes utilizados
 ![alt text](images/LIVE_ORDER_REGISTER.png)
 
 
-### Possíveis erros e troubleshooting 
+## Possíveis erros e troubleshooting 
 
 ### Erros de valores no Numpy
 > Pode haver uma incompantibilidade do numpy instalado na máquina  do usuário e a versão utilizada pelo código, caso a instalação pelos os apresente problemas, você pode tentar dar upgrade na biblioteca `numpy` manualmente.
