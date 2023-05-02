@@ -1,6 +1,6 @@
 import json,numpy,pprint
 
-from .binbinance.BinWebSocket import BinWebSocket
+from .binbinance.binWebSocket import BinWebSocket
 from .binbinance.app_params import *
 
 from binance.enums import *

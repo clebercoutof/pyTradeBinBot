@@ -3,7 +3,7 @@ aiosignal==1.2.0
 async-timeout==4.0.2
 asynctest==0.13.0
 attrs==21.4.0
-backports.zoneinfo==0.2.1
+backports.zoneinfo==0.2.1;python_version<"3.9"
 beautifulsoup4==4.11.1
 build==0.8.0
 certifi==2022.6.15
@@ -19,11 +19,11 @@ importlib-metadata==4.8.3
 importlib-resources==5.4.0
 multidict==5.2.0
 numpy==1.19.5
-package-test==0.1
+#package-test==0.1
 packaging==21.3
 pandas==1.1.5
 pep517==0.12.0
-pkg_resources==0.0.0
+#pkg_resources==0.0.0
 pyparsing==3.0.9
 python-binance==1.0.16
 python-dateutil==2.8.2

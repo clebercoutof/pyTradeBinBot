@@ -10,7 +10,10 @@ class BinWebSocket:
   """ Class used to operate binance togeter with python inside bintradebot"""
   def __init__(self,wsurl):
     self.wsurl = wsurl
-    self.ws = websocket.WebSocketApp(wsurl,on_open=self.on_open,on_message=self.on_message,on_close=self.on_close)
+    self.ws = websocket.WebSocketApp(wsurl,
+                                    on_open=self.on_open,
+                                    on_message=self.on_message,
+                                    on_close=self.on_close)
     
     self.binSim = BinOrderSim(WALLET_COIN,WALLED_USDT)
     self.last_close_price = 0
