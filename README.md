@@ -6,37 +6,70 @@
 
   O protótipo foi desenvolvido considerando uma futuram integração com o framework Django, possibilitando a interação com o usuário por meio de um front-end
 
-## Instalação
- 1 - instalar virtual environment, configurar virtual environment, instalar python 3.9 dev
- 2 - instalar TA-LIB dependencies em C
+## Instalação Manual
+ > Caso o usuário opte por não utilizar a imagem da docker, pode instalar o programa manualmente utilizando os seguintes passos.
+ > É recomendado que a instalação seja feita em um ambiente isolado, recomendamos o `python venv`, você pode encontrar informações nesse  [link](https://docs.python.org/3/library/venv.html).
 
+A instalação manual consiste em alguns passos:
+
+1. Instalação do Python 3.9 e python dev
+
+2. Criação do ambiente virtual; 
+
+3. Instalação da biblioteca C da TA-Lib;
+
+4. Instalação das dependências em python;
+### 1. Instalação Python
+Atualize a lsita de pacotes e instale os pré requisitos
 ```
+$ sudo apt update
+$ sudo apt install software-properties-common
+```
+
+Adicione o PPA da deadsnakes a lista de sources do sistema:
+```
+$ sudo add-apt-repository ppa:deadsnakes/ppa
+```
+### 2. Ambiente Virtual
+> O programa conta com um script para criação do ambiente virtual em python e a adição no comando dentro do arquivo `/home/usr/.bashrc` do usuário. Para efeitos de exemplo, iremos utilizar o nome do ambiente como `tradebin_env`
+
+Clone o repositório no seu computador
+ ```
+  $ git clone git@github.com:clebercoutof/pyTradeBinBot.git
+ ```
+Torne o script executável
+ ```
+  $ chmod +x create_env_3.9.sh 
+ ```
+Execute o script e escolha o nome desejado para o ambiente virtual
+```
+  user@pc:~/path/to/pyTradeBinBot$ ./create_env_3.9.sh 
+  Enter Your VIRTUAL ENV name: tradebin_env
+  Output Path: /home/usr/path/to/pyTradeBinBot/tradebin_env
+```
+
+### 3. Instalação da biblioteca C da TA-Lib;
+> O usuário pode encontrar a biblioteca original dentro da pasta `/external/`, realizando a instalação como um pacote C comum.
+  ```
 $ tar -xzf ta-lib-0.4.0-src.tar.gz
 $ cd ta-lib/
 $ ./configure --prefix=/usr
 $ make
 $ sudo make install
 ```
+### 4. Instalação das dependências em python;
+ > As depêndencias em python podem ser instaladas por meio do comando `pip install`.
 
- 3 - instalar package dependencies com o txt do PIP
+Para ativar o ambiente virtual, utilize o comando `activate_nomedoenv`, no caso do tutorial utilizamos o nome `tradebin_env`:
 
-  É recomendado que a instalação seja feita em um ambiente isolado, recomendamos o `python virtual-env`, você pode encontrar informações nesse  [link](https://docs.python.org/3/library/venv.html).
-
-git clone git@github.com:clebercoutof/pyTradeBinBot.git
-chmod +x create_env_3.9.sh 
-./create_env_3.9.sh 
+ ```
+ user@pc:~/path/to/pyTradeBinBot$ activate_tradebin_env
+ ```
+Dentro do environment, o usuário pode instalar o utilizando a função `pip install` normalmente.
 
 ```
-user@pc:~/path/to/pyTradeBinBot$ ./create_env_3.9.sh 
-Enter Your VIRTUAL ENV name: tradebin_env
-Output Path: /home/usr/path/to/pyTradeBinBot/tradebin_env
+  (tradebin_env) user@pc:~/root/path/to/pyTradeBinBot $ pip install -r requirements.txt .
 ```
-
- To install the pip requirements go to the app folder and activate your virtual env:
-  ```
-  (tradebot-venv) user@pc:~/root/tradebinbot/ $ pip install -r requirements.txt .
-  ```
-
 
 ### Executando o robô
 Você pode executar normalmente o robô como um módulo do seu pacote python
@@ -44,14 +77,15 @@ Você pode executar normalmente o robô como um módulo do seu pacote python
 python -m src.mybot
 ```
 
-### Principais Dependências
+### Tecnologias utilizadas
 Esses são os principais pacotes utilizados
 
- - Binance API
- - TA lib para analise tecnica
- - python virtual environment 
- - C instalado
-
+ - Python Binance v1.0.16
+ - TA-lib v0.4.24
+ - Python v3.9
+ - GCC v7.5.0
+ - Ubuntu v18.04 
+ - Docker
 
 ### Módulos Internos
 
@@ -67,7 +101,7 @@ Esses são os principais pacotes utilizados
 
 ### Resultados
 
-  Balanço final positivo em operação de demonstração com baixos valores para RSI e contratos
+  >Balanço final positivo em operação de demonstração com baixos valores para RSI e contratos
 
 ![alt text](images/SUCCESS%20TEST%201.png)
 
@@ -78,22 +112,22 @@ Esses são os principais pacotes utilizados
 
 ### Possíveis erros e troubleshooting 
 
-#### Erros de valores no Numpy
-Pode haver uma incompantibilidade do numpy já estalado na máquina e a versão utilizada pelo código, caso a instalação pelos requirements apresente problemas, você pode tentar dar upgrade na biblioteca `numpy` manualmente.
+### Erros de valores no Numpy
+> Pode haver uma incompantibilidade do numpy instalado na máquina  do usuário e a versão utilizada pelo código, caso a instalação pelos os apresente problemas, você pode tentar dar upgrade na biblioteca `numpy` manualmente.
 
 #### Mensagem de erro
 ```
 ValueError: numpy.ndarray size changed, may indicate binary incompatibility. Expected 96 from C header, got 80 from PyObject
 ```
 #### Solução 
-Fazer o upgrade da versão da biblioteca `numpy`
+> Fazer o upgrade da versão da biblioteca `numpy`. O usuário pode utilizar o seguinte comando:
 ```
 pip install --upgrade numpy
 ```
-#### Falha na instalação da TA-Lib
-A biblioteca TA-Lib utiliza um código em linguagem C em conjunto com a linguagem Python. Para a instalação ocorrer sem problemas, é necessário que o usuário tenha a biblioteca em C instalada e o setup feito corretamente no sua máquina.
+### Falha na instalação da TA-Lib
+> A biblioteca TA-Lib utiliza um código em linguagem C em conjunto com a linguagem Python. Para a instalação ocorrer sem problemas, é necessário que o usuário tenha a biblioteca em C instalada e o setup feito corretamente no sua máquina.
 
-#### Mensagem de erro
+### Mensagem de erro
 ```
 Building wheel for TA-Lib (setup.py) ... error
   error: subprocess-exited-with-error
@@ -110,10 +144,11 @@ error: command '/usr/bin/x86_64-linux-gnu-gcc' failed with exit code 1
 Failed to build TA-Lib
 ERROR: Could not build wheels for TA-Lib, which is required to install pyproject.toml-based projects
 ```
-#### Solução 
-Refazer a instalação da TA-LIB
+### Solução 
+> Refazer a instalação da TA-LIB
 
-#### Mal funcionamento da biblioteca websocket
+
+### Mal funcionamento da biblioteca websocket
 A biblioteca pode apresentar mal funcionamento caso o usuário tenha outras versões da biblioteca `websocket` instalada ou caso tenha criado um arquivo com o nome `websocket.py`junto ao pacote.
 
 #### Mensagem do erro
@@ -121,21 +156,21 @@ A biblioteca pode apresentar mal funcionamento caso o usuário tenha outras vers
 AttributeError: module 'websocket' has no attribute 'WebSocketApp'
 ```
 
-#### Solução
-Reinstalar a biblioteca websocket individualmente utilizando o comando `pip`.
+### Solução
+> Reinstalar a biblioteca websocket individualmente utilizando o comando `pip`. O usuário pode utilizar os seguintes comandos:
 
-Primeiro remover as duas bibliotecas
+1. Para remover as duas bibliotecas
 ```
 pip uninstall websocket-client
 pip uninstall websocket
 ```
-E então reinstalar.
+2. Para reinstalar.
 ```
 pip install websocket-client
 pip install websocket
 ```
 ##### Solução bônus
-O usuário pode utilizar o comando `locate` para buscar por arquivos nos eu computador e e encontrar o conflito
+> O usuário pode utilizar o comando `locate` para buscar por arquivos nos eu computador e e encontrar o conflito
 ```
 locate websocket.py
 ```
